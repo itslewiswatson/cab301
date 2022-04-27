@@ -79,7 +79,7 @@ class MemberCollection : IMemberCollection
     // Post-condition: return true if this memeber is in the member collection; return false otherwise; member collection remains unchanged
     public bool Search(IMember member)
     {
-    // To be implemented by students in Phase 1
+        return true;
     }
 
     // Remove all the members in this member collection

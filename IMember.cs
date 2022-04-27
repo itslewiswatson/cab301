@@ -53,7 +53,22 @@ using System.Text;
     
         public static bool IsValidContactNumber(string phonenumber)
         {
-        // To be implemented by students in Phase 1
+            if (phonenumber.Length != 10)
+            {
+                return false;
+            }
+
+            int i = 0;
+            while (i < 10) {
+                char currentDigit = phonenumber[i];
+                if (!Char.IsDigit(currentDigit) || (i == 0 && currentDigit != '0'))
+                {
+                    return false;
+                }
+                i++;
+            }
+
+            return true;
         }
 
         // Check if a pin is valid. A pin is valid if it is a number which has a minimal of 4 and a maximal of 6 digits.
@@ -61,7 +76,20 @@ using System.Text;
         // Post-condition: return true, if the pin valid; retuns false otherwise.
         public static bool IsValidPin(string pin)
         {
-        // To be implemented by students in Phase 1
+            if (pin.Length < 4 || pin.Length > 6)
+            {
+                return false;
+            }
+
+            int i = 0;
+            while (i < pin.Length)
+            {
+                char currentDigit = pin[i];
+                if (!Char.IsDigit(currentDigit)) return false;
+                i++;
+            }
+
+            return true;
         }
 
 
