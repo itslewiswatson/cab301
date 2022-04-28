@@ -82,6 +82,8 @@ class MemberCollection : IMemberCollection
     // Post-condition: the given member has been removed from this member collection, if the given meber was in the member collection
     public void Delete(IMember aMember)
     {
+        if (IsEmpty()) return;
+
         Member another = (Member)aMember;
 
         int memberIndex = -1;
@@ -109,12 +111,30 @@ class MemberCollection : IMemberCollection
     // Post-condition: return true if this memeber is in the member collection; return false otherwise; member collection remains unchanged
     public bool Search(IMember member)
     {
+        if (IsEmpty()) return false;
+
         Member another = (Member)member;
 
-        for (int i = 0; i < count; i++)
+        int min = 0;
+        int max = count;
+
+        while (min <= max)
         {
-            Member compare = members[i];
-            if (compare.CompareTo(another) == 0) return true; 
+            int mid = (min + max) / 2;
+            int comparison = another.CompareTo(members[mid]);
+
+            if (comparison == 0)
+            {
+                return true;
+            }
+            else if (comparison < 0)
+            {
+                max = mid - 1;
+            }
+            else
+            {
+                min = mid + 1;
+            }
         }
 
         return false;
