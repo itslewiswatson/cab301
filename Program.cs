@@ -1,50 +1,61 @@
 using System;
 
 class Program {
+    static readonly String[] pinTests = new String[] { "0000", "00000", "000000", "-10000", "1234567", "aaaaa" };
+    static readonly String[] contactNumberTests = new String[] { "0404925759", "4404925759", "0111", "0000000000", "000000000000", "aaaa", "0abcdefghi" };
 
     static void Main()
     {
-        Console.WriteLine("fyck");
+        Console.WriteLine("Testing CAB301 for n10221131");
+        Console.WriteLine("");
 
-        bool result = IMember.IsValidContactNumber("0404925759");
-        Console.WriteLine("IsValidContactNumber(0404925759) -> " + result.ToString());
+        //TestPins();
+        //TestContactNumbers();
 
-        bool result2 = IMember.IsValidContactNumber("4404925759");
-        Console.WriteLine("IsValidContactNumber(4404925759) -> " + result2.ToString());
+        MemberCollection mc = new MemberCollection(10);
+        mc.Add(new Member("Timothy", "Watson"));
+        mc.Add(new Member("Lewis", "Watson"));
+        mc.Add(new Member("Ethan", "Andrews"));
+        mc.Add(new Member("Daniel", "Andrews"));
+        mc.Add(new Member("Joshua", "Smith"));
+        mc.Add(new Member("Lewis", "Watson"));
 
-        bool result3 = IMember.IsValidContactNumber("0111");
-        Console.WriteLine("IsValidContactNumber(0111) -> " + result3.ToString());
+        Console.WriteLine(mc.ToString());
+        Console.WriteLine("");
 
-        bool result4 = IMember.IsValidContactNumber("0000000000");
-        Console.WriteLine("IsValidContactNumber(0000000000) -> " + result4.ToString());
+        mc.Delete(new Member("Lewis", "Watson"));
+        Console.WriteLine(mc.ToString());
+        Console.WriteLine("");
 
-        bool result5 = IMember.IsValidContactNumber("000000000000");
-        Console.WriteLine("IsValidContactNumber(000000000000) -> " + result5.ToString());
+        mc.Delete(new Member("Daniel", "Andrews"));
+        Console.WriteLine(mc.ToString());
+        Console.WriteLine("");
 
-        bool result6 = IMember.IsValidContactNumber("aaaa");
-        Console.WriteLine("IsValidContactNumber(aaaa) -> " + result6.ToString());
-
-        bool result7 = IMember.IsValidContactNumber("0abcdefghi");
-        Console.WriteLine("IsValidContactNumber(0abcdefghi) -> " + result7.ToString());
-
-        bool pin1 = IMember.IsValidPin("0000");
-        Console.WriteLine("IsValidPin(0000) -> " + pin1.ToString());
-
-        bool pin2 = IMember.IsValidPin("00000");
-        Console.WriteLine("IsValidPin(00000) -> " + pin2.ToString());
-
-        bool pin3 = IMember.IsValidPin("000000");
-        Console.WriteLine("IsValidPin(000000) -> " + pin3.ToString());
-
-        bool pin4 = IMember.IsValidPin("-10000");
-        Console.WriteLine("IsValidPin(-10000) -> " + pin4.ToString());
-
-        bool pin5 = IMember.IsValidPin("1234567");
-        Console.WriteLine("IsValidPin(1234567) -> " + pin5.ToString());
-
-        bool pin6 = IMember.IsValidPin("aaaaa");
-        Console.WriteLine("IsValidPin(aaaaa) -> " + pin6.ToString());
 
         Console.Read();
+    }
+
+    static void TestPins()
+    {
+        for (int i = 0; i < pinTests.Length; i++)
+        {
+            String pin = pinTests[i];
+            bool pinResult = IMember.IsValidPin(pin);
+            Console.WriteLine("IsValidPin(\"" + pin + "\") -> " + pinResult.ToString());
+        }
+
+        Console.WriteLine("");
+    }
+
+    static void TestContactNumbers()
+    {
+        for (int i = 0; i < contactNumberTests.Length; i++)
+        {
+            String contactNumber = contactNumberTests[i];
+            bool contactNumberResult = IMember.IsValidContactNumber(contactNumber);
+            Console.WriteLine("IsValidContactNumber(\"" + contactNumber + "\") -> " + contactNumberResult.ToString());
+        }
+
+        Console.WriteLine("");
     }
 }

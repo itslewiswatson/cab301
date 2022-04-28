@@ -62,7 +62,19 @@ class MemberCollection : IMemberCollection
     // No duplicate will be added into this the member collection
     public void Add(IMember member)
     {
-    // To be implemented by students in Phase 1
+        Member another = (Member)member;
+
+        if (IsFull()) return;
+        if (Search(member)) return;
+
+        int position = count - 1;
+        while (position >= 0 && members[position].CompareTo(another) > 0)
+        {
+            members[position + 1] = members[position];
+            position--;
+        }
+        members[position + 1] = another;
+        count++;
     }
 
     // Remove a given member out of this member collection
@@ -70,8 +82,26 @@ class MemberCollection : IMemberCollection
     // Post-condition: the given member has been removed from this member collection, if the given meber was in the member collection
     public void Delete(IMember aMember)
     {
-    // To be implemented by students in Phase 1
+        Member another = (Member)aMember;
 
+        int memberIndex = -1;
+        for (int i = 0; i < count; i++)
+        {
+            Member compare = members[i];
+            if (compare.CompareTo(another) == 0)
+            {
+                memberIndex = i;
+                break;
+            }
+        }
+
+        if (memberIndex == -1) return;
+
+        for (int i = memberIndex; i < count - 1; i++)
+        {
+            members[i] = members[i + 1];
+        }
+        count--;
     }
 
     // Search a given member in this member collection 
@@ -79,7 +109,15 @@ class MemberCollection : IMemberCollection
     // Post-condition: return true if this memeber is in the member collection; return false otherwise; member collection remains unchanged
     public bool Search(IMember member)
     {
-        return true;
+        Member another = (Member)member;
+
+        for (int i = 0; i < count; i++)
+        {
+            Member compare = members[i];
+            if (compare.CompareTo(another) == 0) return true; 
+        }
+
+        return false;
     }
 
     // Remove all the members in this member collection
