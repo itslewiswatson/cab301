@@ -31,6 +31,10 @@ class Program {
         Console.WriteLine(mc.ToString());
         Console.WriteLine("");
 
+        bool search = mc.Search(new Member("Daniel", "Andrews"));
+        Console.WriteLine("mc.Search(Daniel, Andrews) -> " + search.ToString());
+        bool search2 = mc.Search(new Member("Joshua", "Smith"));
+        Console.WriteLine("mc.Search(Joshua, Smith) -> " + search2.ToString());
 
         Console.Read();
     }
