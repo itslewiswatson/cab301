@@ -19,6 +19,7 @@ class Program {
         mc.Add(new Member("Daniel", "Andrews"));
         mc.Add(new Member("Joshua", "Smith"));
         mc.Add(new Member("Lewis", "Watson"));
+        mc.Add(new Member("Anthony", "Watson"));
 
         Console.WriteLine(mc.ToString());
         Console.WriteLine("");
